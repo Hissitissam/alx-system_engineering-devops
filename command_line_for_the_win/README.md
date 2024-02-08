@@ -11,4 +11,6 @@ The SETP command-line tool
 --------------------------
 
 1 etablish an SFTP session 
-2 put local fila
+2 put local file 
+3 check the upload
+4 bye SFTP
