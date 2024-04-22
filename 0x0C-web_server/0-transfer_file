@@ -5,6 +5,6 @@ if [ $# -lt 4 ]
 then
   echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
 else
-  scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa some_page.html ubuntu@100.25.2.67 :/home/ubuntu
+  scp somepage.html ubuntu@100.25.2.67:/home/ubuntu
 fi
 
