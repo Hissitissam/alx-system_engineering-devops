@@ -5,10 +5,22 @@
 apt-get update
 apt-get install -y nginx
 
+# starting nginx service
+sudo service nginx start
+
+# allowing nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Allowing permission
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
 # Creates the directory /etc/nginx/html
 mkdir /etc/nginx/html
+
 # Creates an index.html contain Hello World!
 echo "Hello World!" > /etc/nginx/html/index.html
+
 # Sets Nginx to listen on port 80 and serve files from the /etc/nginx/html directory.
 printf %s "server {
      listen      80;
