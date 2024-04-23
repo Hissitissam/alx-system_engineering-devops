@@ -1,29 +1,23 @@
 #!/usr/bin/env bash
 # Install nginx web server
 
-echo -e "Updating and installing Nginx.\n"
-sudo apt-get update -y -qq && \
-	 sudo apt-get install nginx -y
+#Updating and installing Nginx
+apt-get update
+apt-get install -y nginx
 
-echo -e "\nSetting up some minor stuff.\n"
+# Creates the directory /etc/nginx/html
+mkdir /etc/nginx/html
+# Creates an index.html contain Hello World!
+echo "Hello World!" > /etc/nginx/html/index.html
+# Sets Nginx to listen on port 80 and serve files from the /etc/nginx/html directory.
+printf %s "server {
+     listen      80;
+     listen      [::]:80 default_server;
+     root        /etc/nginx/html;
+     index       index.html index.htm;
+}
+" > /etc/nginx/sites-available/default
 
-# starting nginx 
-sudo service nginx start
+# Restarts the Nginx service to apply the configuration changes.
+service nginx restart
 
-# allowing it on firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Allow permission
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
-
-# Backup default index
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-
-# Creating a Hellow word
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
-
-# Restarting nginx
-sudo service nginx restart
-
-echo -e "\nCompleted. ✅\n"
